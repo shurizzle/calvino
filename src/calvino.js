@@ -16,7 +16,7 @@ Calvino = Class.create({
     return true;
   },
   unsetLang: function(name) {
-    this.__langs.get(name).unset(name);
+    this.__langs.unset(name);
   },
   defaultLang: function(name) {
     if (this.__langs.member(name)) {
@@ -116,8 +116,5 @@ Calvino.Language = Class.create({
     words.each(function(rule) {
         this.set(rule.key, rule.value);
       }, this);
-  },
-  toString: function() {
-    return this.__words.inspect();
   }
 });
