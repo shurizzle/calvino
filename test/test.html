@@ -10,10 +10,11 @@
           rating: 'I like',
           crapping: '#{rating} #{crap}'
         });
+    lang.load('it.js');
     lang.defaultLang('en');
     </script>
   </head>
-  <body onload="alert(lang.get('crapping'))">
-    <pre>Alert window will shows 'I like this shit' :D</pre>
+  <body onload="alert(lang.get('crapping')); alert(lang.it.get('crapping'))">
+    <pre>Alert windows will shows 'I like this shit' and 'Amo questo merda' :D</pre>
   </body>
 </html>

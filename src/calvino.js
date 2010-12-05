@@ -12,11 +12,13 @@ Calvino = Class.create({
 
     this.__langs.set(name, new Calvino.Language());
     this.__langs.get(name).parse(words);
+    this[name] = this.__langs.get(name);
 
     return true;
   },
   unsetLang: function(name) {
     this.__langs.unset(name);
+    delete this[name];
   },
   defaultLang: function(name) {
     if (this.__langs.member(name)) {
@@ -54,7 +56,7 @@ Calvino = Class.create({
   },
   parse: function(words) {
     if (this.__langs.get(this.__default)) {
-      if (typeof(words) == 'strings')
+      if (typeof(words) == 'string')
         words = words.evalJSON();
       words = $H(words);
 
@@ -67,13 +69,33 @@ Calvino = Class.create({
     }
   },
   _glob_parse: function(langs) {
-    if (typeof(langs) == 'strings')
+    if (typeof(langs) == 'string')
       langs = langs.evalJSON();
     langs = $H(langs);
 
     langs.each(function(lang) {
-      this.setLang(lang.name, lang.words);
+      this.setLang(lang.key, lang.value);
+    }, this);
+  },
+  load: function(file) {
+    var res = false;
+
+    new Ajax.Request(file, {
+      method:       'get',
+      asynchronous: false,
+      evalJS:       false,
+
+      onSuccess: function(http) {
+        res = http.responseText;
+      }
     });
+    
+    if (res) {
+      this.parse(res);
+      res = true;
+    }
+
+    return res;
   }
 });
 
