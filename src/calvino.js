@@ -13,8 +13,12 @@ Calvino = Class.create({
     this.__langs.set(name, new Calvino.Language());
     this.__langs.get(name).parse(words);
     this[name] = this.__langs.get(name);
+    this[name].name = name;
 
     return true;
+  },
+  langs: function() {
+    return this.__langs.keys();
   },
   unsetLang: function(name) {
     this.__langs.unset(name);

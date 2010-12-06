@@ -14,7 +14,7 @@
     lang.defaultLang('en');
     </script>
   </head>
-  <body onload="alert(lang.get('crapping')); alert(lang.it.get('crapping'))">
+  <body onload="alert('Available languages:\n' + lang.langs().join('\n')); alert(lang.get('crapping')); alert(lang.it.get('crapping'))">
     <pre>Alert windows will shows 'I like this shit' and 'Amo questo merda' :D</pre>
   </body>
 </html>
